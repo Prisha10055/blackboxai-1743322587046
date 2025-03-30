@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | TradeLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-2xl"></i>
+                <span class="text-xl font-bold">TradeLearn</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-200">Home</a>
+                <a href="learn.html" class="hover:text-blue-200">Learn</a>
+                <a href="simulator.html" class="hover:text-blue-200">Simulator</a>
+                <a href="real-trading.html" class="hover:text-blue-200">Real Trading</a>
+                <a href="account.html" class="font-semibold hover:text-blue-200">Account</a>
+            </div>
+            <div class="md:hidden">
+                <button class="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-8">Your Account</h1>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Profile Card -->
+                <div class="md:col-span-1 bg-white rounded-lg shadow-md p-6">
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-user text-3xl text-blue-600"></i>
+                        </div>
+                        <h2 id="user-name" class="text-xl font-bold mb-1">Guest User</h2>
+                        <p id="user-email" class="text-gray-600 mb-4">guest@example.com</p>
+                        <button id="edit-profile-btn" class="btn-primary w-full">Edit Profile</button>
+                    </div>
+                </div>
+
+                <!-- Account Details -->
+                <div class="md:col-span-2 space-y-6">
+                    <!-- Progress Section -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Learning Progress</h2>
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1">
+                                <span>Completed Modules</span>
+                                <span id="completed-modules">0/6</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-600">Simulator Balance</p>
+                                <p id="simulator-balance" class="text-xl font-bold">$10,000.00</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-600">Real Trading</p>
+                                <p id="real-trading-status" class="text-xl font-bold">Not Enabled</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Section -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Settings</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium">Dark Mode</p>
+                                    <p class="text-sm text-gray-600">Switch between light and dark theme</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium">Email Notifications</p>
+                                    <p class="text-sm text-gray-600">Receive important updates via email</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="email-notifications" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium">Risk Warnings</p>
+                                    <p class="text-sm text-gray-600">Show risk warnings before trading</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="risk-warnings" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Security</h2>
+                        <div class="space-y-4">
+                            <button id="change-password-btn" class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="font-medium">Change Password</p>
+                                        <p class="text-sm text-gray-600">Update your account password</p>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </div>
+                            </button>
+                            <button id="two-factor-btn" class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="font-medium">Two-Factor Authentication</p>
+                                        <p class="text-sm text-gray-600">Add an extra layer of security</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-sm text-gray-500 mr-2">Disabled</span>
+                                        <i class="fas fa-chevron-right text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </button>
+                            <button id="logout-btn" class="w-full text-left p-3 text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition mt-6">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="font-medium">Log Out</p>
+                                        <p class="text-sm text-red-500">Sign out of your account</p>
+                                    </div>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Edit Profile</h2>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="profile-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Name</label>
+                    <input type="text" id="edit-name" class="input-field" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="edit-email" class="input-field" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" id="edit-phone" class="input-field">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancel-edit" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Change Password</h2>
+                <button id="close-password-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="password-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Current Password</label>
+                    <input type="password" class="input-field" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">New Password</label>
+                    <input type="password" class="input-field" required minlength="8">
+                    <p class="text-xs text-gray-500 mt-1">Minimum 8 characters with at least 1 number and 1 uppercase letter</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Confirm New Password</label>
+                    <input type="password" class="input-field" required minlength="8">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancel-password" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <span class="text-xl font-bold">TradeLearn</span>
+                    </div>
+                    <p>Educating the next generation of traders.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="hover:text-blue-300">Home</a></li>
+                            <li><a href="learn.html" class="hover:text-blue-300">Learn</a></li>
+                            <li><a href="simulator.html" class="hover:text-blue-300">Simulator</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                       I'll now create the account.html page for managing user profiles and settings:
+
+<create_file>
+<path>account.html</path>
+<content>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Account | TradeLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-2xl"></i>
+                <span class="text-xl font-bold">TradeLearn</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-200">Home</a>
+                <a href="learn.html" class="hover:text-blue-200">Learn</a>
+                <a href="simulator.html" class="hover:text-blue-200">Simulator</a>
+                <a href="real-trading.html" class="hover:text-blue-200">Real Trading</a>
+                <a href="account.html" class="font-semibold hover:text-blue-200">Account</a>
+            </div>
+            <div class="md:hidden">
+                <button class="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold text-center mb-8">Your Account</h1>
+        
+        <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6">Profile Information</h2>
+            <form id="profile-form">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2">First Name</label>
+                        <input type="text" id="first-name" class="input-field" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Last Name</label>
+                        <input type="text" id="last-name" class="input-field" required>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="email" class="input-field" required>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" id="phone" class="input-field" required>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-gray-700 mb-2">Change Password</label>
+                    <input type="password" id="password" class="input-field" minlength="8>
+                    <p class="text-xs text-gray-500 mt-1">Minimum 8 characters with at least 1 number and 1 uppercase letter</p>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="btn-primary px-8 py-3">Update Profile</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6">Account Settings</h2>
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-lg">Dark Mode</span>
+                <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox">
+            </div>
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-lg">Email Notifications</span>
+                <input type="checkbox" id="email-notifications" class="toggle-checkbox" checked>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-lg">SMS Notifications</span>
+                <input type="checkbox" id="sms-notifications" class="toggle-checkbox">
+            </div>
+            <div class="mt-6">
+                <button id="save-settings" class="btn-primary px-8 py-3">Save Settings</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <span class="text-xl font-bold">TradeLearn</span>
+                    </div>
+                    <p>Educating the next generation of traders.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="hover:text-blue-300">Home</a></li>
+                            <li><a href="learn.html" class="hover:text-blue-300">Learn</a></li>
+                            <li><a href="simulator.html" class="hover:text-blue-300">Simulator</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-300">Terms</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Privacy</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Risk Disclosure</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 TradeLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('tradeLearnUser')) || {};
+            document.getElementById('first-name').value = user.name.split(' ')[0] || '';
+            document.getElementById('last-name').value = user.name.split(' ')[1] || '';
+            document.getElementById('email').value = user.email || '';
+            document.getElementById('phone').value = user.phone || '';
+
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            darkModeToggle.checked = user.darkMode || false;
+            darkModeToggle.addEventListener('change', function() {
+                document.body.classList.toggle('bg-gray-900', this.checked);
+                document.body.classList.toggle('text-white', this.checked);
+                localStorage.setItem('darkMode', this.checked);
+            });
+
+            // Save settings
+            document.getElementById('save-settings').addEventListener('click', function() {
+                user.name = `${document.getElementById('first-name').value} ${document.getElementById('last-name').value}`;
+                user.email = document.getElementById('email').value;
+                user.phone = document.getElementById('phone').value;
+                localStorage.setItem('tradeLearnUser', JSON.stringify(user));
+                showToast('Profile updated successfully!', 'success');
+            });
+        });
+    </script>
+</body>
+</html>
