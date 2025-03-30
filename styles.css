@@ -1,0 +1,39 @@
+/* Custom styles to complement Tailwind */
+.hero {
+    background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(37, 99, 235, 0.9)), 
+                url('https://images.pexels.com/photos/6804588/pexels-photo-6804588.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+    display: none;
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+/* Chart container styles */
+.chart-container {
+    height: 400px;
+    width: 100%;
+}
+
+/* Form input styles */
+.input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Button styles */
+.btn-primary {
+    @apply bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero {
+        text-align: center;
+    }
+}
