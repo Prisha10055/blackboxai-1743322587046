@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeLearn - Master Trading with Confidence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-2xl"></i>
+                <span class="text-xl font-bold">TradeLearn</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-200">Home</a>
+                <a href="learn.html" class="hover:text-blue-200">Learn</a>
+                <a href="simulator.html" class="hover:text-blue-200">Simulator</a>
+                <a href="real-trading.html" class="hover:text-blue-200">Real Trading</a>
+                <a href="account.html" class="hover:text-blue-200">Account</a>
+            </div>
+            <div class="md:hidden">
+                <button class="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero bg-blue-700 text-white py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Master Trading with Confidence</h1>
+                <p class="text-xl mb-8">Learn with virtual currency before risking real money. All analysis types covered.</p>
+                <div class="flex space-x-4">
+                    <a href="learn.html" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-100 transition">Start Learning</a>
+                    <a href="simulator.html" class="border-2 border-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition">Try Simulator</a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="https://images.pexels.com/photos/6804588/pexels-photo-6804588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                     alt="Trading charts" 
+                     class="rounded-lg shadow-xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">What You'll Learn</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-chart-bar text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Technical Analysis</h3>
+                    <p>Master chart patterns, indicators, and technical strategies used by professional traders.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-file-invoice-dollar text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Fundamental Analysis</h3>
+                    <p>Learn to evaluate companies, financial statements, and economic factors that move markets.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-comments text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Sentiment Analysis</h3>
+                    <p>Understand market psychology and how to gauge crowd behavior for trading opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <span class="text-xl font-bold">TradeLearn</span>
+                    </div>
+                    <p>Educating the next generation of traders.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="hover:text-blue-300">Home</a></li>
+                            <li><a href="learn.html" class="hover:text-blue-300">Learn</a></li>
+                            <li><a href="simulator.html" class="hover:text-blue-300">Simulator</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-300">Terms</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Privacy</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Risk Disclosure</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 TradeLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
