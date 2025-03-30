@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Trading | TradeLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation (same as index.html) -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-2xl"></i>
+                <span class="text-xl font-bold">TradeLearn</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-200">Home</a>
+                <a href="learn.html" class="font-semibold hover:text-blue-200">Learn</a>
+                <a href="simulator.html" class="hover:text-blue-200">Simulator</a>
+                <a href="real-trading.html" class="hover:text-blue-200">Real Trading</a>
+                <a href="account.html" class="hover:text-blue-200">Account</a>
+            </div>
+            <div class="md:hidden">
+                <button class="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold text-center mb-8">Trading Education Modules</h1>
+        
+        <!-- Progress Tracker -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-12">
+            <h2 class="text-xl font-semibold mb-4">Your Progress</h2>
+            <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                <div id="progress-bar" class="bg-blue-600 h-4 rounded-full" style="width: 0%"></div>
+            </div>
+            <p id="progress-text" class="text-sm text-gray-600">0% Complete</p>
+        </div>
+
+        <!-- Module Tabs -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="flex border-b">
+                <button class="tab-btn py-4 px-6 font-medium text-gray-500 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-500" data-tab="technical">
+                    <i class="fas fa-chart-bar mr-2"></i>Technical Analysis
+                </button>
+                <button class="tab-btn py-4 px-6 font-medium text-gray-500 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-500" data-tab="fundamental">
+                    <i class="fas fa-file-invoice-dollar mr-2"></i>Fundamental Analysis
+                </button>
+                <button class="tab-btn py-4 px-6 font-medium text-gray-500 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-500" data-tab="sentiment">
+                    <i class="fas fa-comments mr-2"></i>Sentiment Analysis
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="p-6">
+                <!-- Technical Analysis -->
+                <div id="technical" class="tab-content active">
+                    <h2 class="text-2xl font-bold mb-4">Technical Analysis</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Chart Patterns</h3>
+                            <img src="https://images.pexels.com/photos/6804589/pexels-photo-6804589.jpeg" alt="Chart patterns" class="rounded-lg mb-4">
+                            <p class="mb-4">Learn to identify common chart patterns like head and shoulders, double tops/bottoms, and triangles that signal potential market movements.</p>
+                            <button class="btn-primary start-module" data-module="technical-1">Start Module</button>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Indicators</h3>
+                            <img src="https://images.pexels.com/photos/6804590/pexels-photo-6804590.jpeg" alt="Technical indicators" class="rounded-lg mb-4">
+                            <p class="mb-4">Master technical indicators including Moving Averages, RSI, MACD, and Bollinger Bands to analyze price trends and momentum.</p>
+                            <button class="btn-primary start-module" data-module="technical-2">Start Module</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fundamental Analysis -->
+                <div id="fundamental" class="tab-content hidden">
+                    <h2 class="text-2xl font-bold mb-4">Fundamental Analysis</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Financial Statements</h3>
+                            <img src="https://images.pexels.com/photos/4386426/pexels-photo-4386426.jpeg" alt="Financial statements" class="rounded-lg mb-4">
+                            <p class="mb-4">Understand how to read and analyze balance sheets, income statements, and cash flow statements to evaluate company health.</p>
+                            <button class="btn-primary start-module" data-module="fundamental-1">Start Module</button>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Valuation Metrics</h3>
+                            <img src="https://images.pexels.com/photos/4386157/pexels-photo-4386157.jpeg" alt="Valuation metrics" class="rounded-lg mb-4">
+                            <p class="mb-4">Learn key valuation metrics like P/E ratio, P/B ratio, and dividend yield to determine if a stock is over or undervalued.</p>
+                            <button class="btn-primary start-module" data-module="fundamental-2">Start Module</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentiment Analysis -->
+                <div id="sentiment" class="tab-content hidden">
+                    <h2 class="text-2xl font-bold mb-4">Sentiment Analysis</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Market Sentiment</h3>
+                            <img src="https://images.pexels.com/photos/518245/pexels-photo-518245.jpeg" alt="Market sentiment" class="rounded-lg mb-4">
+                            <p class="mb-4">Learn to gauge overall market sentiment using tools like the VIX (Fear Index) and put/call ratios to identify potential turning points.</p>
+                            <button class="btn-primary start-module" data-module="sentiment-1">Start Module</button>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Social Media Analysis</h3>
+                            <img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg" alt="Social media analysis" class="rounded-lg mb-4">
+                            <p class="mb-4">Discover how to analyze social media trends, news sentiment, and crowd behavior to anticipate market movements.</p>
+                            <button class="btn-primary start-module" data-module="sentiment-2">Start Module</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <span class="text-xl font-bold">TradeLearn</span>
+                    </div>
+                    <p>Educating the next generation of traders.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="hover:text-blue-300">Home</a></li>
+                            <li><a href="learn.html" class="hover:text-blue-300">Learn</a></li>
+                            <li><a href="simulator.html" class="hover:text-blue-300">Simulator</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-300">Terms</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Privacy</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Risk Disclosure</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 TradeLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active tab button
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('text-blue-600', 'border-blue-500');
+                    b.classList.add('text-gray-500', 'border-transparent');
+                });
+                btn.classList.add('text-blue-600', 'border-blue-500');
+                btn.classList.remove('text-gray-500', 'border-transparent');
+                
+                // Show selected tab content
+                const tabId = btn.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.remove('hidden');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Module progress tracking
+        document.querySelectorAll('.start-module').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const moduleId = this.getAttribute('data-module');
+                const user = JSON.parse(localStorage.getItem('tradeLearnUser'));
+                
+                if (!user.completedModules.includes(moduleId)) {
+                    user.completedModules.push(moduleId);
+                    localStorage.setItem('tradeLearnUser', JSON.stringify(user));
+                    updateProgress();
+                    showToast('Module marked as completed!', 'success');
+                } else {
+                    showToast('You already completed this module!', 'info');
+                }
+            });
+        });
+
+        // Update progress bar
+        function updateProgress() {
+            const user = JSON.parse(localStorage.getItem('tradeLearnUser'));
+            const totalModules = 6; // Total number of modules
+            const completed = user.completedModules.length;
+            const percentage = Math.round((completed / totalModules) * 100);
+            
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').textContent = `${percentage}% Complete (${completed}/${totalModules} modules)`;
+        }
+
+        // Initialize progress on page load
+        document.addEventListener('DOMContentLoaded', updateProgress);
+    </script>
+</body>
+</html>
