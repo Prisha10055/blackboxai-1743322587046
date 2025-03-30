@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Simulator | TradeLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-2xl"></i>
+                <span class="text-xl font-bold">TradeLearn</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-200">Home</a>
+                <a href="learn.html" class="hover:text-blue-200">Learn</a>
+                <a href="simulator.html" class="font-semibold hover:text-blue-200">Simulator</a>
+                <a href="real-trading.html" class="hover:text-blue-200">Real Trading</a>
+                <a href="account.html" class="hover:text-blue-200">Account</a>
+            </div>
+            <div class="md:hidden">
+                <button class="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">Trading Simulator</h1>
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Portfolio Summary -->
+            <div class="lg:col-span-1 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4">Your Portfolio</h2>
+                <div class="mb-6">
+                    <p class="text-gray-600">Available Balance</p>
+                    <p id="available-balance" class="text-2xl font-bold">$10,000.00</p>
+                </div>
+                <div class="mb-6">
+                    <p class="text-gray-600">Portfolio Value</p>
+                    <p id="portfolio-value" class="text-2xl font-bold">$10,000.00</p>
+                </div>
+                <div class="mb-6">
+                    <p class="text-gray-600">Today's Change</p>
+                    <p id="daily-change" class="text-2xl font-bold text-green-500">+$0.00 (0.00%)</p>
+                </div>
+                
+                <h3 class="text-lg font-semibold mb-3">Your Holdings</h3>
+                <div id="holdings-list" class="space-y-3">
+                    <!-- Holdings will be populated by JavaScript -->
+                    <p class="text-gray-500 italic">No holdings yet</p>
+                </div>
+            </div>
+
+            <!-- Chart and Trading Panel -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Asset Selector and Chart -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                        <div class="flex items-center mb-4 md:mb-0">
+                            <select id="asset-selector" class="input-field mr-4">
+                                <option value="AAPL">Apple (AAPL)</option>
+                                <option value="MSFT">Microsoft (MSFT)</option>
+                                <option value="GOOGL">Alphabet (GOOGL)</option>
+                                <option value="BTC-USD">Bitcoin (BTC-USD)</option>
+                                <option value="ETH-USD">Ethereum (ETH-USD)</option>
+                                <option value="SPY">S&P 500 (SPY)</option>
+                            </select>
+                            <span id="current-price" class="text-xl font-bold">$0.00</span>
+                            <span id="price-change" class="ml-2 text-sm"></span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="timeframe-btn bg-blue-100 text-blue-600 px-3 py-1 rounded" data-timeframe="1d">1D</button>
+                            <button class="timeframe-btn bg-blue-100 text-blue-600 px-3 py-1 rounded" data-timeframe="1w">1W</button>
+                            <button class="timeframe-btn bg-blue-600 text-white px-3 py-1 rounded" data-timeframe="1m">1M</button>
+                            <button class="timeframe-btn bg-blue-100 text-blue-600 px-3 py-1 rounded" data-timeframe="3m">3M</button>
+                            <button class="timeframe-btn bg-blue-100 text-blue-600 px-3 py-1 rounded" data-timeframe="1y">1Y</button>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="price-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Trading Panel -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold mb-4">Trade</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Buy Panel -->
+                        <div class="border-r border-gray-200 pr-6">
+                            <h3 class="text-lg font-medium mb-3 text-green-600">Buy</h3>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Quantity</label>
+                                <input type="number" id="buy-qty" class="input-field" min="1" value="1">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Order Type</label>
+                                <select id="buy-type" class="input-field">
+                                    <option value="market">Market</option>
+                                    <option value="limit">Limit</option>
+                                </select>
+                            </div>
+                            <div id="buy-limit-container" class="mb-4 hidden">
+                                <label class="block text-gray-700 mb-2">Limit Price</label>
+                                <input type="number" id="buy-limit" class="input-field" min="0.01" step="0.01">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Estimated Cost</label>
+                                <p id="buy-estimate" class="text-xl font-bold">$0.00</p>
+                            </div>
+                            <button id="buy-btn" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition">
+                                Buy <span id="buy-symbol">AAPL</span>
+                            </button>
+                        </div>
+
+                        <!-- Sell Panel -->
+                        <div class="pl-0 md:pl-6">
+                            <h3 class="text-lg font-medium mb-3 text-red-600">Sell</h3>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Quantity</label>
+                                <input type="number" id="sell-qty" class="input-field" min="1" value="1">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Order Type</label>
+                                <select id="sell-type" class="input-field">
+                                    <option value="market">Market</option>
+                                    <option value="limit">Limit</option>
+                                </select>
+                            </div>
+                            <div id="sell-limit-container" class="mb-4 hidden">
+                                <label class="block text-gray-700 mb-2">Limit Price</label>
+                                <input type="number" id="sell-limit" class="input-field" min="0.01" step="0.01">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Estimated Proceeds</label>
+                                <p id="sell-estimate" class="text-xl font-bold">$0.00</p>
+                            </div>
+                            <button id="sell-btn" class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-semibold transition">
+                                Sell <span id="sell-symbol">AAPL</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <span class="text-xl font-bold">TradeLearn</span>
+                    </div>
+                    <p>Educating the next generation of traders.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="hover:text-blue-300">Home</a></li>
+                            <li><a href="learn.html" class="hover:text-blue-300">Learn</a></li>
+                            <li><a href="simulator.html" class="hover:text-blue-300">Simulator</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-300">Terms</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Privacy</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Risk Disclosure</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 TradeLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Global variables
+        let priceChart;
+        let currentSymbol = 'AAPL';
+        let currentTimeframe = '1m';
+        let currentPrice = 0;
+        let priceHistory = {};
+        let updateInterval;
+
+        // Initialize simulator
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user data
+            const user = JSON.parse(localStorage.getItem('tradeLearnUser'));
+            updatePortfolioDisplay(user);
+
+            // Initialize chart
+            initializeChart();
+            
+            // Load initial asset data
+            loadAssetData(currentSymbol, currentTimeframe);
+
+            // Set up event listeners
+            setupEventListeners();
+
+            // Start price updates
+            startPriceUpdates();
+        });
+
+        // Initialize price chart
+        function initializeChart() {
+            const ctx = document.getElementById('price-chart').getContext('2d');
+            priceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Price',
+                        data: [],
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Load asset data
+        function loadAssetData(symbol, timeframe) {
+            currentSymbol = symbol;
+            currentTimeframe = timeframe;
+            
+            // Generate random price history based on timeframe
+            const now = new Date();
+            let labels = [];
+            let data = [];
+            let basePrice = generateRandomPrice(symbol);
+            
+            // Set initial price
+            currentPrice = basePrice;
+            document.getElementById('current-price').textContent = `$${currentPrice.toFixed(2)}`;
+            document.getElementById('buy-symbol').textContent = symbol;
+            document.getElementById('sell-symbol').textContent = symbol;
+            updateEstimates();
+
+            // Generate historical data points
+            let pointCount;
+            switch(timeframe) {
+                case '1d': pointCount = 24; break; // Hourly for 1 day
+                case '1w': pointCount = 7; break;  // Daily for 1 week
+                case '1m': pointCount = 30; break; // Daily for 1 month
+                case '3m': pointCount = 90; break; // Daily for 3 months
+                case '1y': pointCount = 12; break; // Monthly for 1 year
+            }
+
+            for (let i = pointCount; i >= 0; i--) {
+                let date;
+                switch(timeframe) {
+                    case '1d':
+                        date = new Date(now);
+                        date.setHours(now.getHours() - i);
+                        labels.push(date.toLocaleTimeString());
+                        break;
+                    case '1w':
+                        date = new Date(now);
+                        date.setDate(now.getDate() - i);
+                        labels.push(date.toLocaleDateString());
+                        break;
+                    case '1m':
+                    case '3m':
+                        date = new Date(now);
+                        date.setDate(now.getDate() - i);
+                        labels.push(date.toLocaleDateString());
+                        break;
+                    case '1y':
+                        date = new Date(now);
+                        date.setMonth(now.getMonth() - i);
+                        labels.push(date.toLocaleDateString(undefined, {month: 'short', year: 'numeric'}));
+                        break;
+                }
+
+                // Generate random price movement
+                const volatility = 0.02;
+                const change = (Math.random() * 2 - 1) * volatility * basePrice;
+                basePrice += change;
+                data.push(basePrice);
+            }
+
+            // Store price history
+            priceHistory[symbol] = {
+                labels: labels,
+                data: data,
+                lastPrice: data[data.length - 1]
+            };
+
+            // Update chart
+            updateChart();
+        }
+
+        // Update chart with current data
+        function updateChart() {
+            const history = priceHistory[currentSymbol];
+            priceChart.data.labels = history.labels;
+            priceChart.data.datasets[0].data = history.data;
+            priceChart.update();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Asset selector
+            document.getElementById('asset-selector').addEventListener('change', function() {
+                loadAssetData(this.value, currentTimeframe);
+            });
+
+            // Timeframe buttons
+            document.querySelectorAll('.timeframe-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.timeframe-btn').forEach(b => {
+                        b.classList.remove('bg-blue-600', 'text-white');
+                        b.classList.add('bg-blue-100', 'text-blue-600');
+                    });
+                    this.classList.add('bg-blue-600', 'text-white');
+                    this.classList.remove('bg-blue-100', 'text-blue-600');
+                    loadAssetData(currentSymbol, this.getAttribute('data-timeframe'));
+                });
+            });
+
+            // Order type changes
+            document.getElementById('buy-type').addEventListener('change', function() {
+                document.getElementById('buy-limit-container').classList.toggle('hidden', this.value !== 'limit');
+                updateEstimates();
+            });
+
+            document.getElementById('sell-type').addEventListener('change', function() {
+                document.getElementById('sell-limit-container').classList.toggle('hidden', this.value !== 'limit');
+                updateEstimates();
+            });
+
+            // Quantity changes
+            document.getElementById('buy-qty').addEventListener('input', updateEstimates);
+            document.getElementById('sell-qty').addEventListener('input', updateEstimates);
+            document.getElementById('buy-limit').addEventListener('input', updateEstimates);
+            document.getElementById('sell-limit').addEventListener('input', updateEstimates);
+
+            // Buy/Sell buttons
+            document.getElementById('buy-btn').addEventListener('click', executeBuy);
+            document.getElementById('sell-btn').addEventListener('click', executeSell);
+        }
+
+        // Start periodic price updates
+        function startPriceUpdates() {
+            updateInterval = setInterval(() => {
+                // Simulate small price changes
+                const volatility = 0.005;
+                const change = (Math.random() * 2 - 1) * volatility * currentPrice;
+                currentPrice += change;
+                
+                // Update display
+                document.getElementById('current-price').textContent = `$${currentPrice.toFixed(2)}`;
+                
+                // Update price change indicator
+                const history = priceHistory[currentSymbol];
+                const openPrice = history.data[0];
+                const changeAmount = currentPrice - openPrice;
+                const changePercent = (changeAmount / openPrice) * 100;
+                
+                const changeElement = document.getElementById('price-change');
+                changeElement.textContent = `${changeAmount >= 0 ? '+' : ''}${changeAmount.toFixed(2)} (${changePercent.toFixed(2)}%)`;
+                changeElement.className = `ml-2 text-sm ${changeAmount >= 0 ? 'text-green-500' : 'text-red-500'}`;
+                
+                // Update estimates
+                updateEstimates();
+                
+                // Add to price history
+                history.data.push(currentPrice);
+                history.labels.push(new Date().toLocaleTimeString());
+                if (history.data.length > 100) {
+                    history.data.shift();
+                    history.labels.shift();
+                }
+                
+                // Update chart if viewing 1D timeframe
+                if (currentTimeframe === '1d') {
+                    updateChart();
+                }
+            }, 3000);
+        }
+
+        // Update buy/sell estimates
+        function updateEstimates() {
+            const buyQty = parseInt(document.getElementById('buy-qty').value) || 0;
+            const sellQty = parseInt(document.getElementById('sell-qty').value) || 0;
+            const buyType = document.getElementById('buy-type').value;
+            const sellType = document.getElementById('sell-type').value;
+            
+            // Buy estimate
+            let buyPrice = currentPrice;
+            if (buyType === 'limit') {
+                buyPrice = parseFloat(document.getElementById('buy-limit').value) || currentPrice;
+            }
+            const buyEstimate = buyQty * buyPrice;
+            document.getElementById('buy-estimate').textContent = `$${buyEstimate.toFixed(2)}`;
+            
+            // Sell estimate
+            let sellPrice = currentPrice;
+            if (sellType === 'limit') {
+                sellPrice = parseFloat(document.getElementById('sell-limit').value) || currentPrice;
+            }
+            const sellEstimate = sellQty * sellPrice;
+            document.getElementById('sell-estimate').textContent = `$${sellEstimate.toFixed(2)}`;
+        }
+
+        // Execute buy order
+        function executeBuy() {
+            const user = JSON.parse(localStorage.getItem('tradeLearnUser'));
+            const qty = parseInt(document.getElementById('buy-qty').value) || 0;
+            const orderType = document.getElementById('buy-type').value;
+            let price = currentPrice;
+            
+            if (orderType === 'limit') {
+                price = parseFloat(document.getElementById('buy-limit').value) || 0;
+                if (price > currentPrice) {
+                    showToast('Limit price above current market price', 'error');
+                    return;
+                }
+            }
+            
+            const cost = qty * price;
+            if (cost > user.simulatorFunds) {
+                showToast('Insufficient funds', 'error');
+                return;
+            }
+            
+            if (qty <= 0) {
+                showToast('Invalid quantity', 'error');
+                return;
+            }
+            
+            // Update user funds
+            user.simulatorFunds -= cost;
+            
+            // Update portfolio
+            const existingHolding = user.portfolio.find(h => h.symbol === currentSymbol);
+            if (existingHolding) {
+                existingHolding.qty += qty;
+                existingHolding.avgPrice = ((existingHolding.avgPrice * (existingHolding.qty - qty)) + (price * qty)) / existingHolding.qty;
+            } else {
+                user.portfolio.push({
+                    symbol: currentSymbol,
+                    qty: qty,
+                    avgPrice: price
+                });
+            }
+            
+            // Save and update display
+            localStorage.setItem('tradeLearnUser', JSON.stringify(user));
+            updatePortfolioDisplay(user);
+            showToast(`Successfully bought ${qty} shares of ${currentSymbol}`, 'success');
+        }
+
+        // Execute sell order
+        function executeSell() {
+            const user = JSON.parse(localStorage.getItem('tradeLearnUser'));
+            const qty = parseInt(document.getElementById('sell-qty').value) || 0;
+            const orderType = document.getElementById('sell-type').value;
+            let price = currentPrice;
+            
+            if (orderType === 'limit') {
+                price = parseFloat(document.getElementById('sell-limit').value) || 0;
+                if (price < currentPrice) {
+                    showToast('Limit price below current market price', 'error');
+                    return;
+                }
+            }
+            
+            const holding = user.portfolio.find(h => h.symbol === currentSymbol);
+            if (!holding || holding.qty < qty) {
+                showToast('Insufficient shares to sell', 'error');
+                return;
+            }
+            
+            if (qty <= 0) {
+                showToast('Invalid quantity', 'error');
+                return;
+            }
+            
+            // Update user funds
+            const proceeds = qty * price;
+            user.simulatorFunds += proceeds;
+            
+            // Update portfolio
+            holding.qty -= qty;
+            if (holding.qty === 0) {
+                user.portfolio = user.portfolio.filter(h => h.symbol !== currentSymbol);
+            }
+            
+            // Save and update display
+            localStorage.setItem('tradeLearnUser', JSON.stringify(user));
+            updatePortfolioDisplay(user);
+            showToast(`Successfully sold ${qty} shares of ${currentSymbol}`, 'success');
+        }
+
+        // Update portfolio display
+        function updatePortfolioDisplay(user) {
+            // Update balances
+            document.getElementById('available-balance').textContent = `$${user.simulatorFunds.toFixed(2)}`;
+            
+            // Calculate portfolio value
+            let portfolioValue = user.simulatorFunds;
+            let holdingsHtml = '';
+            
+            user.portfolio.forEach(holding => {
+                const currentValue = holding.qty * generateRandomPrice(holding.symbol);
+                portfolioValue += currentValue;
+                const costBasis = holding.qty * holding.avgPrice;
+                const gainLoss = currentValue - costBasis;
+                const gainLossPercent = (gainLoss / costBasis) * 100;
+                
+                holdingsHtml += `
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-medium">${holding.symbol}</p>
+                            <p class="text-sm text-gray-500">${holding.qty} shares</p>
+                        </div>
+                        <div class="text-right">
+                            <p>$${currentValue.toFixed(2)}</p>
+                            <p class="text-sm ${gainLoss >= 0 ? 'text-green-500' : 'text-red-500'}">
+                                ${gainLoss >= 0 ? '+' : ''}${gainLoss.toFixed(2)} (${gainLossPercent.toFixed(2)}%)
+                            </p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('portfolio-value').textContent = `$${portfolioValue.toFixed(2)}`;
+            document.getElementById('holdings-list').innerHTML = holdingsHtml || '<p class="text-gray-500 italic">No holdings yet</p>';
+            
+            // Calculate daily change (simplified for demo)
+            const dailyChange = portfolioValue - 10000;
+            const dailyChangePercent = (dailyChange / 10000) * 100;
+            const dailyChangeElement = document.getElementById('daily-change');
+            dailyChangeElement.textContent = `${dailyChange >= 0 ? '+' : ''}${dailyChange.toFixed(2)} (${dailyChangePercent.toFixed(2)}%)`;
+            dailyChangeElement.className = `text-2xl font-bold ${dailyChange >= 0 ? 'text-green-500' : 'text-red-500'}`;
+        }
+    </script>
+</body>
+</html>
