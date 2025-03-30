@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Trading | TradeLearn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-2xl"></i>
+                <span class="text-xl font-bold">TradeLearn</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-200">Home</a>
+                <a href="learn.html" class="hover:text-blue-200">Learn</a>
+                <a href="simulator.html" class="hover:text-blue-200">Simulator</a>
+                <a href="real-trading.html" class="font-semibold hover:text-blue-200">Real Trading</a>
+                <a href="account.html" class="hover:text-blue-200">Account</a>
+            </div>
+            <div class="md:hidden">
+                <button class="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-3xl font-bold text-center mb-8">Ready for Real Trading?</h1>
+            
+            <!-- Progress Steps -->
+            <div class="flex justify-between mb-12 relative">
+                <div class="step flex flex-col items-center z-10">
+                    <div class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center mb-2">
+                        <span>1</span>
+                    </div>
+                    <span class="text-sm font-medium">Account Setup</span>
+                </div>
+                <div class="step flex flex-col items-center z-10">
+                    <div class="w-12 h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center mb-2">
+                        <span>2</span>
+                    </div>
+                    <span class="text-sm font-medium">Risk Assessment</span>
+                </div>
+                <div class="step flex flex-col items-center z-10">
+                    <div class="w-12 h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center mb-2">
+                        <span>3</span>
+                    </div>
+                    <span class="text-sm font-medium">Funding</span>
+                </div>
+                <div class="step flex flex-col items-center z-10">
+                    <div class="w-12 h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center mb-2">
+                        <span>4</span>
+                    </div>
+                    <span class="text-sm font-medium">Start Trading</span>
+                </div>
+                <div class="absolute top-6 left-0 right-0 h-1 bg-gray-200 mx-12"></div>
+                <div id="progress-bar" class="absolute top-6 left-0 h-1 bg-blue-600 mx-12" style="width: 25%"></div>
+            </div>
+
+            <!-- Account Setup Form -->
+            <div id="step-1" class="step-content active">
+                <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6">Create Your Trading Account</h2>
+                    <form id="account-form">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2">First Name</label>
+                                <input type="text" class="input-field" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Last Name</label>
+                                <input type="text" class="input-field" required>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" class="input-field" required>
+                        </div>
+                        <div class="mt-4">
+                            <label class="block text-gray-700 mb-2">Password</label>
+                            <input type="password" class="input-field" required minlength="8">
+                            <p class="text-xs text-gray-500 mt-1">Minimum 8 characters with at least 1 number and 1 uppercase letter</p>
+                        </div>
+                        <div class="mt-4">
+                            <label class="block text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" class="input-field" required>
+                        </div>
+                        <div class="mt-6">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-blue-600" required>
+                                <span class="ml-2 text-gray-700">I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-center">
+                    <button id="next-1" class="btn-primary px-8 py-3">Continue to Risk Assessment</button>
+                </div>
+            </div>
+
+            <!-- Risk Assessment -->
+            <div id="step-2" class="step-content hidden">
+                <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6">Risk Assessment Questionnaire</h2>
+                    <p class="text-gray-600 mb-6">Please answer these questions to help us understand your risk tolerance and investment goals.</p>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">1. What is your primary investment goal?</h3>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="goal" class="mr-2" value="preservation">
+                                    <span>Capital preservation (low risk)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="goal" class="mr-2" value="income">
+                                    <span>Generate income (moderate risk)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="goal" class="mr-2" value="growth">
+                                    <span>Capital growth (higher risk)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="goal" class="mr-2" value="speculation">
+                                    <span>Speculation (highest risk)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">2. How would you react to a 20% portfolio decline in a year?</h3>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="reaction" class="mr-2" value="sell">
+                                    <span>Sell all investments</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="reaction" class="mr-2" value="some">
+                                    <span>Sell some investments</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="reaction" class="mr-2" value="hold">
+                                    <span>Hold and wait for recovery</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="reaction" class="mr-2" value="buy">
+                                    <span>Buy more investments</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">3. What is your investment time horizon?</h3>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="horizon" class="mr-2" value="short">
+                                    <span>Less than 1 year</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="horizon" class="mr-2" value="medium">
+                                    <span>1-5 years</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="horizon" class="mr-2" value="long">
+                                    <span>More than 5 years</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between">
+                    <button id="back-2" class="btn-primary bg-gray-500 hover:bg-gray-600 px-8 py-3">Back</button>
+                    <button id="next-2" class="btn-primary px-8 py-3">Continue to Funding</button>
+                </div>
+            </div>
+
+            <!-- Funding -->
+            <div id="step-3" class="step-content hidden">
+                <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6">Fund Your Account</h2>
+                    <p class="text-gray-600 mb-6">Connect your bank account or crypto wallet to start trading with real money.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-500 transition cursor-pointer">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-university text-3xl text-blue-600 mr-4"></i>
+                                <h3 class="text-xl font-semibold">Bank Transfer</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Connect your bank account for secure transfers (3-5 business days)</p>
+                            <button class="btn-primary w-full">Connect Bank</button>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-500 transition cursor-pointer">
+                            <div class="flex items-center mb-4">
+                                <i class="fab fa-bitcoin text-3xl text-yellow-500 mr-4"></i>
+                                <h3 class="text-xl font-semibold">Crypto Wallet</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Connect your crypto wallet for instant deposits (BTC, ETH, USDC supported)</p>
+                            <button class="btn-primary w-full">Connect Wallet</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-lg font-semibold mb-4">Initial Deposit Amount</h3>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-500">$</span>
+                            <input type="number" class="input-field pl-8" placeholder="100.00" min="100">
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Minimum initial deposit: $100</p>
+                    </div>
+                </div>
+                <div class="flex justify-between">
+                    <button id="back-3" class="btn-primary bg-gray-500 hover:bg-gray-600 px-8 py-3">Back</button>
+                    <button id="next-3" class="btn-primary px-8 py-3">Complete Setup</button>
+                </div>
+            </div>
+
+            <!-- Completion -->
+            <div id="step-4" class="step-content hidden">
+                <div class="bg-white rounded-lg shadow-md p-8 mb-8 text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-check text-green-600 text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4">Account Setup Complete!</h2>
+                    <p class="text-gray-600 mb-6">Your trading account is now ready. You can start trading with real money.</p>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                        <p class="font-semibold">Your account will be reviewed and activated within 24 hours.</p>
+                        <p class="text-sm text-gray-600">You'll receive an email confirmation once approved.</p>
+                    </div>
+                    <a href="simulator.html" class="btn-primary inline-block px-8 py-3">Start Trading</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <span class="text-xl font-bold">TradeLearn</span>
+                    </div>
+                    <p>Educating the next generation of traders.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="hover:text-blue-300">Home</a></li>
+                            <li><a href="learn.html" class="hover:text-blue-300">Learn</a></li>
+                            <li><a href="simulator.html" class="hover:text-blue-300">Simulator</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-300">Terms</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Privacy</a></li>
+                            <li><a href="#" class="hover:text-blue-300">Risk Disclosure</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 TradeLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Step navigation
+            let currentStep = 1;
+            const totalSteps = 4;
+            
+            // Next buttons
+            document.getElementById('next-1').addEventListener('click', function() {
+                if (validateStep(1)) {
+                    showStep(2);
+                }
+            });
+            
+            document.getElementById('next-2').addEventListener('click', function() {
+                if (validateStep(2)) {
+                    showStep(3);
+                }
+            });
+            
+            document.getElementById('next-3').addEventListener('click', function() {
+                if (validateStep(3)) {
+                    showStep(4);
+                    completeAccountSetup();
+                }
+            });
+            
+            // Back buttons
+            document.getElementById('back-2').addEventListener('click', function() {
+                showStep(1);
+            });
+            
+            document.getElementById('back-3').addEventListener('click', function() {
+                showStep(2);
+            });
+            
+            // Show step function
+            function showStep(step) {
+                document.querySelectorAll('.step-content').forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+                
+                document.getElementById(`step-${step}`).classList.remove('hidden');
+                document.getElementById(`step-${step}`).classList.add('active');
+                
+                // Update progress bar
+                const progressPercent = ((step - 1) / (totalSteps - 1)) * 100;
+                document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+                
+                // Update step indicators
+                document.querySelectorAll('.step div:first-child').forEach((el, index) => {
+                    if (index < step) {
+                        el.classList.remove('bg-gray-300', 'text-gray-600');
+                        el.classList.add('bg-blue-600', 'text-white');
+                    } else {
+                        el.classList.add('bg-gray-300', 'text-gray-600');
+                        el.classList.remove('bg-blue-600', 'text-white');
+                    }
+                });
+                
+                currentStep = step;
+            }
+            
+            // Validate step function
+            function validateStep(step) {
+                if (step === 1) {
+                    const form = document.getElementById('account-form');
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return false;
+                    }
+                    
+                    // Additional password validation
+                    const password = form.querySelector('input[type="password"]').value;
+                    if (!/(?=.*\d)(?=.*[A-Z])/.test(password)) {
+                        showToast('Password must contain at least 1 number and 1 uppercase letter', 'error');
+                        return false;
+                    }
+                }
+                
+                if (step === 2) {
+                    const goals = document.querySelectorAll('input[name="goal"]:checked');
+                    const reactions = document.querySelectorAll('input[name="reaction"]:checked');
+                    const horizons = document.querySelectorAll('input[name="horizon"]:checked');
+                    
+                    if (goals.length === 0 || reactions.length === 0 || horizons.length === 0) {
+                        showToast('Please answer all risk assessment questions', 'error');
+                        return false;
+                    }
+                }
+                
+                if (step === 3) {
+                    const amount = document.querySelector('#step-3 input[type="number"]').value;
+                    if (!amount || parseFloat(amount) < 100) {
+                        showToast('Minimum initial deposit is $100', 'error');
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+            
+            // Complete account setup
+            function completeAccountSetup() {
+                const user = JSON.parse(localStorage.getItem('tradeLearnUser')) || {};
+                user.realTradingEnabled = true;
+                localStorage.setItem('tradeLearnUser', JSON.stringify(user));
+            }
+        });
+    </script>
+</body>
+</html>
